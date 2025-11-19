@@ -1,0 +1,283 @@
+ScreenManager:
+    HomeScreen:
+    AdminLoginScreen:
+    AdminPanelScreen:
+    RegisterScreen:
+    VoterLoginScreen:
+    VoteScreen:
+    ResultsScreen:
+
+<HomeScreen>:
+    name: 'home'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Label:
+            text: 'College Election System'
+            font_size: '24sp'
+            size_hint_y: None
+            height: '50dp'
+        Button:
+            text: 'Admin Login'
+            size_hint_y: None
+            height: '48dp'
+            on_release: app.root.current = 'admin_login'
+        Button:
+            text: 'Register as Voter'
+            size_hint_y: None
+            height: '48dp'
+            on_release: app.root.current = 'register'
+        Button:
+            text: 'Voter Login'
+            size_hint_y: None
+            height: '48dp'
+            on_release: app.root.current = 'voter_login'
+        Button:
+            text: 'Exit'
+            size_hint_y: None
+            height: '48dp'
+            on_release: app.stop()
+
+<AdminLoginScreen>:
+    name: 'admin_login'
+    password_input: password
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 10
+        Label:
+            text: 'Admin Login'
+            font_size: '20sp'
+        TextInput:
+            id: password
+            password: True
+            multiline: False
+            hint_text: 'Enter admin password'
+        Label:
+            id: admin_login_msg
+            text: ''
+            color: 1,0,0,1
+            size_hint_y: None
+            height: '24dp'
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            spacing: 10
+            Button:
+                text: 'Login'
+                on_release: root.do_login()
+            Button:
+                text: 'Back'
+                on_release: app.root.current = 'home'
+
+<AdminPanelScreen>:
+    name: 'admin_panel'
+    candidate_input: candidate
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 10
+        spacing: 8
+        Label:
+            text: 'Admin Panel'
+            font_size: '20sp'
+            size_hint_y: None
+            height: '36dp'
+        BoxLayout:
+            size_hint_y: None
+            height: '40dp'
+            spacing: 8
+            TextInput:
+                id: candidate
+                multiline: False
+                hint_text: 'Candidate name'
+            Button:
+                text: 'Add'
+                on_release: root.add_candidate()
+            Button:
+                text: 'Remove'
+                on_release: root.remove_candidate()
+        Label:
+            id: admin_panel_msg
+            text: ''
+            color: 0,0.6,0,1
+            size_hint_y: None
+            height: '24dp'
+        BoxLayout:
+            spacing: 8
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Registered Voters'
+                    size_hint_y: None
+                    height: '24dp'
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    Label:
+                        id: voters_list
+                        text: ''
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+            BoxLayout:
+                orientation: 'vertical'
+                Label:
+                    text: 'Results'
+                    size_hint_y: None
+                    height: '24dp'
+                ScrollView:
+                    do_scroll_x: False
+                    do_scroll_y: True
+                    Label:
+                        id: results_list
+                        text: ''
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        text_size: self.width, None
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            spacing: 8
+            Button:
+                text: 'Refresh Voters'
+                on_release: root.refresh_voters()
+            Button:
+                text: 'Refresh Results'
+                on_release: root.refresh_results()
+            Button:
+                text: 'Back'
+                on_release: app.root.current = 'home'
+
+<RegisterScreen>:
+    name: 'register'
+    voter_id: vid
+    voter_name: vname
+    voter_pass: vpass
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 8
+        Label:
+            text: 'Voter Registration'
+            font_size: '20sp'
+        TextInput:
+            id: vid
+            multiline: False
+            hint_text: 'Voter ID'
+        TextInput:
+            id: vname
+            multiline: False
+            hint_text: 'Full name'
+        TextInput:
+            id: vpass
+            multiline: False
+            hint_text: 'Password'
+            password: True
+        Label:
+            id: register_msg
+            text: ''
+            color: 0,0.6,0,1
+            size_hint_y: None
+            height: '24dp'
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            spacing: 8
+            Button:
+                text: 'Register'
+                on_release: root.do_register()
+            Button:
+                text: 'Back'
+                on_release: app.root.current = 'home'
+
+<VoterLoginScreen>:
+    name: 'voter_login'
+    voter_id: vid
+    voter_pass: vpw
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 20
+        spacing: 8
+        Label:
+            text: 'Voter Login'
+            font_size: '20sp'
+        TextInput:
+            id: vid
+            multiline: False
+            hint_text: 'Voter ID'
+        TextInput:
+            id: vpw
+            multiline: False
+            hint_text: 'Password'
+            password: True
+        Label:
+            id: voter_login_msg
+            text: ''
+            color: 1,0,0,1
+            size_hint_y: None
+            height: '24dp'
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            spacing: 8
+            Button:
+                text: 'Login'
+                on_release: root.do_login()
+            Button:
+                text: 'Back'
+                on_release: app.root.current = 'home'
+
+<VoteScreen>:
+    name: 'vote'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 12
+        spacing: 8
+        Label:
+            text: 'Cast Your Vote'
+            font_size: '20sp'
+            size_hint_y: None
+            height: '36dp'
+        ScrollView:
+            GridLayout:
+                id: candidates_box
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                row_default_height: '40dp'
+                row_force_default: True
+        Label:
+            id: vote_msg
+            text: ''
+            color: 0,0.6,0,1
+            size_hint_y: None
+            height: '24dp'
+        BoxLayout:
+            size_hint_y: None
+            height: '48dp'
+            spacing: 8
+            Button:
+                text: 'Refresh'
+                on_release: root.refresh_candidates()
+            Button:
+                text: 'Back'
+                on_release: app.root.current = 'home'
+
+<ResultsScreen>:
+    name: 'results'
+    BoxLayout:
+        orientation: 'vertical'
+        padding: 12
+        spacing: 8
+        Label:
+            text: 'Election Results'
+            font_size: '20sp'
+        ScrollView:
+            Label:
+                text: 'Use Admin Panel to view results'
+        Button:
+            text: 'Back'
+            size_hint_y: None
+            height: '48dp'
+            on_release: app.root.current = 'home'
